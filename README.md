@@ -44,7 +44,7 @@ For TouchPlayer:
 Objective-C 
 
 ```objective-c
-	player = [[FW360PlayerViewController alloc] initWithTouch:url];
+	player          = [[FW360PlayerViewController alloc] initWithTouch:url];
 	player.delegate = self;
 	[self presentViewController:player animated:YES completion:nil];
 ```
