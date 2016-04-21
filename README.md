@@ -12,8 +12,10 @@ You must first download the trial version or the full version of the Kaboore 360
 
 You need to include the framework in your project and Apple's SceneKit framework.
 
+```objective-c
 	#import <SceneKit/SceneKit.h>
 	#import <KabooreMedia/KabooreMedia.h>
+```
 
 Note that you have to add the _kaboore_ framework to the "Embedded Binaries" section in your project.
 
