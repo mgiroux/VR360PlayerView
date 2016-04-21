@@ -21,34 +21,41 @@ Note that you have to add the _kaboore_ framework to the "Embedded Binaries" sec
 
 You have 2 choices as of now. Cardboard or Touch. You have 2 init methods, 1 for each type.
 
-	//Objective-C
-	
+Objective-C
+
+```objective-c
 	player          = [[FW360PlayerViewController alloc] initWithCardboard:url];
 	player.delegate = self;
 	[self presentViewController:player animated:YES completion:nil];
+```
 
-	// Swift
-	
+Swift
+
+```swift
 	player          = FW360PlayerViewController(cardboard: url);
 	player.delegate = self;
 	self.presentViewController(player, animated: YES, completion: nil);
+```
 
 The player should load and start playing
 
 For TouchPlayer:	
 
-	// Objective-C
+Objective-C 
 
+```objective-c
 	player = [[FW360PlayerViewController alloc] initWithTouch:url];
 	player.delegate = self;
 	[self presentViewController:player animated:YES completion:nil];
+```
+
+Swift
 	
-	// Swift
-	
+```swift
 	player          = FW360PlayerViewController(touch: url);
 	player.delegate = self;
 	self.presentViewController(player, animated: YES, completion: nil);
-	
+```	
 
 To work properly, you view controller needs to implement the `FW360PlayerDelegate` protocol. There is 2 optional methods called `FWPlayerDidAppear` and `FWPlayerDidDisappear` that you can use to perform tasks after the view appeared and after it disappeared.
 
