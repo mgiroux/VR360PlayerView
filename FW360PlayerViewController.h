@@ -44,7 +44,7 @@
 @property (nonatomic, readonly) BOOL isPlaying;
 
 /** Setup a delegate for the player's events */
-@property (nonatomic, weak) id delegate;
+@property (nonatomic, weak) id<FW360PlayerDelegate> delegate;
 
 /** The actual player view */
 @property (nonatomic, readonly) UIView *playerView;
