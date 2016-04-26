@@ -8,26 +8,15 @@
 
 #import "FW360PlayerViewController.h"
 
-static NSString *playerAppKey = @"";
-
 @implementation FW360PlayerViewController
 @synthesize isPlaying, delegate, playerView, duration;
 
-+ (void)setPlayerAppKey:(NSString *)key
+- (instancetype)initWithCardboard:(NSURL *)video withLicense:(NSString *)license
 {
-    playerAppKey = key;
-}
-
-- (instancetype)initWithCardboard:(NSURL *)video
-{
-    if ([playerAppKey isEqualToString:@""]) {
-        [NSException raise:@"Invalid Application Key for 360 Player" format:@"Key cannot be empty, use setPlayerAppKey: to set it"];
-    }
-    
     self       = [super init];
     playerType = 1;
     
-    cardboardPlayer                            = [[KMPlayer360DoubleViewController alloc] initWithContentURL:video andAppKey:@"TEST000000000000000000000000000000000000"];
+    cardboardPlayer                            = [[KMPlayer360DoubleViewController alloc] initWithContentURL:video andAppKey:license];
     cardboardPlayer.moviePlayer.delegate       = self;
     cardboardPlayer.moviePlayer.shouldAutoplay = YES;
     cardboardPlayer.moviePlayer.repeatMode     = KMMovieRepeatModeNone;
@@ -51,16 +40,12 @@ static NSString *playerAppKey = @"";
     return self;
 }
 
-- (instancetype)initWithTouch:(NSURL *)video
+- (instancetype)initWithTouch:(NSURL *)video withLicense:(NSString *)license
 {
-    if ([playerAppKey isEqualToString:@""]) {
-        [NSException raise:@"Invalid Application Key for 360 Player" format:@"Key cannot be empty, use setPlayerAppKey: to set it"];
-    }
-    
     self       = [super init];
     playerType = 2;
     
-    touchPlayer                            = [[KMPlayer360ViewController alloc] initWithContentURL:video andAppKey:@"TEST000000000000000000000000000000000000"];
+    touchPlayer                            = [[KMPlayer360ViewController alloc] initWithContentURL:video andAppKey:license];
     touchPlayer.moviePlayer.delegate       = self;
     touchPlayer.moviePlayer.shouldAutoplay = YES;
     touchPlayer.moviePlayer.repeatMode     = KMMovieRepeatModeNone;
@@ -81,7 +66,7 @@ static NSString *playerAppKey = @"";
     playerView = touchPlayer.view;
     duration   = CMTimeGetSeconds(touchPlayer.moviePlayer.duration);
     recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTap:)];
-        
+    
     return self;
 }
 
@@ -173,6 +158,15 @@ static NSString *playerAppKey = @"";
 {
     if (delegate != nil) {
         [delegate FWPlayerDidFinishPlaying:self];
+    }
+}
+
+- (void)setInitialRotation:(int)initialRotation
+{
+    if (playerType == 1) {
+        cardboardPlayer.moviePlayer.addedRotation = initialRotation;
+    } else {
+        touchPlayer.moviePlayer.addedRotation = initialRotation;
     }
 }
 

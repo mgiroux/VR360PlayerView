@@ -26,7 +26,7 @@ You have 2 choices as of now. Cardboard or Touch. You have 2 init methods, 1 for
 Objective-C
 
 ```objective-c
-player          = [[FW360PlayerViewController alloc] initWithCardboard:url];
+player          = [[FW360PlayerViewController alloc] initWithCardboard:url withLicense:@"TEST000000000000000000000000000000000000"];
 player.delegate = self;
 [self presentViewController:player animated:YES completion:nil];
 ```
@@ -34,7 +34,7 @@ player.delegate = self;
 Swift
 
 ```swift
-player          = FW360PlayerViewController(cardboard: url);
+player          = FW360PlayerViewController(cardboard: url, license: "TEST000000000000000000000000000000000000");
 player.delegate = self;
 self.presentViewController(player, animated: YES, completion: nil);
 ```
@@ -46,7 +46,7 @@ For TouchPlayer:
 Objective-C 
 
 ```objective-c
-player          = [[FW360PlayerViewController alloc] initWithTouch:url];
+player          = [[FW360PlayerViewController alloc] initWithTouch:url withLicense:@"TEST000000000000000000000000000000000000"];
 player.delegate = self;
 [self presentViewController:player animated:YES completion:nil];
 ```
@@ -54,7 +54,7 @@ player.delegate = self;
 Swift
 	
 ```swift
-player          = FW360PlayerViewController(touch: url);
+player          = FW360PlayerViewController(touch: url, license: "TEST000000000000000000000000000000000000");
 player.delegate = self;
 self.presentViewController(player, animated: YES, completion: nil);
 ```	
@@ -64,3 +64,12 @@ To work properly, you view controller needs to implement the `FW360PlayerDelegat
 You have access to `play` and `pause` for the player. You can also seek programatically with `seekToTime` and you can set the speed of the touch controls and fields of view (Fov) with `setToucheControlSpeed` and `setFieldOfView`.
 
 You also have access to the following properties: `duration`, `isPlaying` and `playerView`.
+
+
+Video Rotation
+
+To change the video rotation, you use the `initialRotation` property, it requires the angle in degrees. (affects the X axis only)
+
+```objective-c
+player.initialRotation = 180;
+```

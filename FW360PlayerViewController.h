@@ -52,14 +52,14 @@
 /** Duration of the video */
 @property (nonatomic, readonly) int duration;
 
-/** Set KabooreMedia's key */
-+ (void)setPlayerAppKey:(NSString *)key;
+/** Initial Rotation of the video */
+@property (nonatomic) int initialRotation;
 
 /** Initialize 360 player in Cardboard mode */
-- (instancetype)initWithCardboard:(NSURL *)video;
+- (instancetype)initWithCardboard:(NSURL *)video withLicense:(NSString *)license;
 
 /** Initiliaze 360 player in Touch mode */
-- (instancetype)initWithTouch:(NSURL *)video;
+- (instancetype)initWithTouch:(NSURL *)video withLicense:(NSString *)license;
 
 /** Set the speed at which the panning will be (Touch only) */
 - (void)setTouchControlSpeed:(int)x y:(int)y;
